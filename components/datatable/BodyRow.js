@@ -40,6 +40,7 @@ var BodyRow = exports.BodyRow = function (_Component) {
         var _this = _possibleConstructorReturn(this, (BodyRow.__proto__ || Object.getPrototypeOf(BodyRow)).call(this, props));
 
         _this.onClick = _this.onClick.bind(_this);
+        _this.onDoubleClick = _this.onDoubleClick.bind(_this);
         _this.onTouchEnd = _this.onTouchEnd.bind(_this);
         _this.onRightClick = _this.onRightClick.bind(_this);
         _this.onMouseDown = _this.onMouseDown.bind(_this);
@@ -55,6 +56,17 @@ var BodyRow = exports.BodyRow = function (_Component) {
         value: function onClick(event) {
             if (this.props.onClick) {
                 this.props.onClick({
+                    originalEvent: event,
+                    data: this.props.rowData,
+                    index: this.props.rowIndex
+                });
+            }
+        }
+    }, {
+        key: 'onDoubleClick',
+        value: function onDoubleClick(event) {
+            if (this.props.onDoubleClick) {
+                this.props.onDoubleClick({
                     originalEvent: event,
                     data: this.props.rowData,
                     index: this.props.rowIndex
@@ -157,7 +169,7 @@ var BodyRow = exports.BodyRow = function (_Component) {
                 'tr',
                 { ref: function ref(el) {
                         _this2.container = el;
-                    }, className: className, onClick: this.onClick, onDoubleClick: this.props.onDoubleClick, onTouchEnd: this.onTouchEnd, onContextMenu: this.onRightClick, onMouseDown: this.onMouseDown,
+                    }, className: className, onClick: this.onClick, onDoubleClick: this.onDoubleClick, onTouchEnd: this.onTouchEnd, onContextMenu: this.onRightClick, onMouseDown: this.onMouseDown,
                     onDragStart: this.props.onDragStart, onDragEnd: this.onDragEnd, onDragOver: this.onDragOver, onDragLeave: this.onDragLeave, onDrop: this.onDrop },
                 cells
             );
